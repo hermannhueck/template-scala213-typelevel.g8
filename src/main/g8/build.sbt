@@ -21,6 +21,10 @@ inThisBuild(
       "org.scala-lang" % "scala-reflect"  % scalaVersion.value,
       shapeless,
       fs2Core,
+      circeCore,
+      http4sCore,
+      doobieCore,
+      zio,
       munit,
       kindProjectorPlugin,
       betterMonadicForPlugin
