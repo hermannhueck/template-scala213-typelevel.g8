@@ -24,6 +24,7 @@ inThisBuild(
       circeCore,
       http4sCore,
       doobieCore,
+      quillCore,
       zio,
       munit,
       kindProjectorPlugin,

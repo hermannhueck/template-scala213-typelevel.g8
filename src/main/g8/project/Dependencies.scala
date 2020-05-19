@@ -9,7 +9,8 @@ object Dependencies {
   lazy val circeVersion            = "0.13.0"
   lazy val http4sVersion           = "0.21.4"
   lazy val doobieVersion           = "0.9.0"
-  lazy val zioVersion              = "1.0.0-RC18-2"
+  lazy val quillVersion            = "3.5.1"
+  lazy val zioVersion              = "1.0.0-RC19-2"
   lazy val munitVersion            = "0.7.7"
   lazy val scalaCheckVersion       = "1.14.3"
 
@@ -37,6 +38,9 @@ object Dependencies {
   lazy val doobiePostgres     = "org.tpolecat"           %% "doobie-postgres"         % doobieVersion
   lazy val doobieH2           = "org.tpolecat"           %% "doobie-h2"               % doobieVersion
   lazy val doobieFree         = "org.tpolecat"           %% "doobie-free"             % doobieVersion
+  lazy val quillCore          = "io.getquill"            %% "quill-core"              % quillVersion
+  lazy val quillSql           = "io.getquill"            %% "quill-sql"               % quillVersion
+  lazy val quillJdbc          = "io.getquill"            %% "quill-jdbc"              % quillVersion
   lazy val zio                = "dev.zio"                %% "zio"                     % zioVersion
   lazy val munit              = "org.scalameta"          %% "munit"                   % munitVersion
   lazy val scalaCheck         = "org.scalacheck"         %% "scalacheck"              % scalaCheckVersion
