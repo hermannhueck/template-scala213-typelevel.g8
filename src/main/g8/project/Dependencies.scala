@@ -4,18 +4,20 @@ object Dependencies {
 
   lazy val collectionCompatVersion = "2.1.6"
   lazy val shapelessVersion        = "2.3.3"
-  lazy val fs2Version              = "2.3.0"
-  lazy val monixVersion            = "3.2.1"
+  lazy val catsEffectVersion       = "2.1.3"
+  lazy val fs2Version              = "2.4.1"
+  lazy val monixVersion            = "3.2.2"
   lazy val circeVersion            = "0.13.0"
   lazy val http4sVersion           = "0.21.4"
   lazy val doobieVersion           = "0.9.0"
   lazy val quillVersion            = "3.5.1"
   lazy val zioVersion              = "1.0.0-RC20"
-  lazy val munitVersion            = "0.7.7"
+  lazy val munitVersion            = "0.7.8"
   lazy val scalaCheckVersion       = "1.14.3"
 
   lazy val collectionCompat   = "org.scala-lang.modules" %% "scala-collection-compat" % collectionCompatVersion
   lazy val shapeless          = "com.chuusai"            %% "shapeless"               % shapelessVersion
+  lazy val catsEffect         = "org.typelevel"          %% "cats-effect"             % catsEffectVersion
   lazy val fs2Core            = "co.fs2"                 %% "fs2-core"                % fs2Version
   lazy val fs2Io              = "co.fs2"                 %% "fs2-io"                  % fs2Version
   lazy val fs2ReactiveStreams = "co.fs2"                 %% "fs2-reactive-streams"    % fs2Version
@@ -27,6 +29,7 @@ object Dependencies {
   lazy val circeGenericExtras = "io.circe"               %% "circe-generic-extras"    % circeVersion
   lazy val circeShapes        = "io.circe"               %% "circe-shapes"            % circeVersion
   lazy val circeOptics        = "io.circe"               %% "circe-optics"            % circeVersion
+  lazy val circeJawn          = "io.circe"               %% "circe-jawn"              % circeVersion
   lazy val http4sCore         = "org.http4s"             %% "http4s-core"             % http4sVersion
   lazy val http4sDsl          = "org.http4s"             %% "http4s-dsl"              % http4sVersion
   lazy val http4sClient       = "org.http4s"             %% "http4s-client"           % http4sVersion
@@ -38,8 +41,11 @@ object Dependencies {
   lazy val doobieCore         = "org.tpolecat"           %% "doobie-core"             % doobieVersion
   lazy val doobiePostgres     = "org.tpolecat"           %% "doobie-postgres"         % doobieVersion
   lazy val doobieH2           = "org.tpolecat"           %% "doobie-h2"               % doobieVersion
+  lazy val doobieHikari       = "org.tpolecat"           %% "doobie-hikari"           % doobieVersion
   lazy val doobieFree         = "org.tpolecat"           %% "doobie-free"             % doobieVersion
   lazy val doobieQuill        = "org.tpolecat"           %% "doobie-quill"            % doobieVersion
+  lazy val doobieSpecs2       = "org.tpolecat"           %% "doobie-specs2"           % doobieVersion
+  lazy val doobieScalatest    = "org.tpolecat"           %% "doobie-scalatest"        % doobieVersion
   lazy val quillCore          = "io.getquill"            %% "quill-core"              % quillVersion
   lazy val quillSql           = "io.getquill"            %% "quill-sql"               % quillVersion
   lazy val quillJdbc          = "io.getquill"            %% "quill-jdbc"              % quillVersion
@@ -58,4 +64,40 @@ object Dependencies {
   lazy val betterMonadicForPlugin = compilerPlugin(
     compilerPlugin("com.olegpy" %% "better-monadic-for" % betterMonadicForVersion)
   )
+
+  def scalaCompiler(scalaVersion: String) = "org.scala-lang" % "scala-compiler" % scalaVersion
+  def scalaReflect(scalaVersion: String)  = "org.scala-lang" % "scala-reflect"  % scalaVersion
+
+  def coreDependencies(scalaVersion: String) =
+    Seq(
+      scalaCompiler(scalaVersion),
+      scalaReflect(scalaVersion),
+      shapeless,
+      monixEval,
+      fs2Core,
+      circeCore,
+      circeJawn,
+      http4sCore,
+      doobieCore,
+      doobiePostgres,
+      doobieH2,
+      doobieHikari,
+      doobieQuill,
+      doobieSpecs2,
+      doobieScalatest,
+      quillCore,
+      zio,
+      munit,
+      kindProjectorPlugin,
+      betterMonadicForPlugin
+    ) ++ Seq(
+      scalaCheck
+    ).map(_ % Test)
+
+  def hutilDependencies(scalaVersion: String) =
+    Seq(
+      scalaCompiler(scalaVersion),
+      scalaReflect(scalaVersion),
+      catsEffect
+    )
 }

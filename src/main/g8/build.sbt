@@ -1,44 +1,22 @@
-import Dependencies._
-import ScalacOptions._
-
 val projectName        = "$project_name$"
 val projectDescription = "$project_description$"
 val projectVersion     = "$project_version$"
 
 val scala213 = "$scala_latest_version$"
 
-inThisBuild(
+lazy val commonSettings =
   Seq(
     version := projectVersion,
     scalaVersion := scala213,
     publish / skip := true,
-    scalacOptions ++= defaultScalacOptions,
+    scalacOptions ++= ScalacOptions.defaultScalacOptions,
+    Compile / console / scalacOptions := ScalacOptions.consoleScalacOptions,
+    Test / console / scalacOptions := ScalacOptions.consoleScalacOptions,
     semanticdbEnabled := true,
     semanticdbVersion := "4.3.10", // scalafixSemanticdb.revision,
     scalafixDependencies ++= Seq("com.github.liancheng" %% "organize-imports" % "0.3.0"),
-    libraryDependencies ++= Seq(
-      "org.scala-lang" % "scala-compiler" % scalaVersion.value,
-      "org.scala-lang" % "scala-reflect"  % scalaVersion.value,
-      shapeless,
-      monixEval,
-      fs2Core,
-      circeCore,
-      http4sCore,
-      doobieCore,
-      doobiePostgres,
-      doobieH2,
-      doobieQuill,
-      quillCore,
-      zio,
-      munit,
-      kindProjectorPlugin,
-      betterMonadicForPlugin
-    ) ++ Seq(
-      scalaCheck
-    ).map(_ % Test),
     Test / parallelExecution := false,
-    // run 100 tests for each property // -s = -minSuccessfulTests
-    Test / testOptions += Tests.Argument(TestFrameworks.ScalaCheck, "-s", "100"),
+    Test / testOptions += Tests.Argument(TestFrameworks.ScalaCheck, "-s", "100"), // -s = -minSuccessfulTests
     testFrameworks += new TestFramework("munit.Framework"),
     initialCommands :=
       s"""|
@@ -49,35 +27,33 @@ inThisBuild(
           |implicit val contextShiftIO: ContextShift[IO] = IO.contextShift(global)
           |implicit val timerIO: Timer[IO] = IO.timer(global)
           |println
-          |""".stripMargin // initialize REPL
+          |""".stripMargin
   )
-)
 
 lazy val root = (project in file("."))
   .aggregate(core)
+  .settings(commonSettings)
   .settings(
     name := "root",
     description := "root project",
-    Compile / console / scalacOptions := consoleScalacOptions,
     sourceDirectories := Seq.empty
   )
 
 lazy val core = (project in file("core"))
   .dependsOn(hutil)
+  .settings(commonSettings)
   .settings(
     name := projectName,
     description := projectDescription,
-    Compile / console / scalacOptions := consoleScalacOptions,
-    libraryDependencies ++= Seq(
-      fs2Io
-    )
+    libraryDependencies ++= Dependencies.coreDependencies(scalaVersion.value)
   )
 
 lazy val hutil = (project in file("hutil"))
+  .settings(commonSettings)
   .settings(
     name := "hutil",
     description := "Hermann's Utilities",
-    Compile / console / scalacOptions := consoleScalacOptions
+    libraryDependencies ++= Dependencies.hutilDependencies(scalaVersion.value)
   )
 
 // GraphBuddy support
