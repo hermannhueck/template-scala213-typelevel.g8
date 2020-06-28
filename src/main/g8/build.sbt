@@ -13,21 +13,21 @@ lazy val commonSettings =
     Compile / console / scalacOptions := ScalacOptions.consoleScalacOptions,
     Test / console / scalacOptions := ScalacOptions.consoleScalacOptions,
     semanticdbEnabled := true,
-    semanticdbVersion := "4.3.10", // scalafixSemanticdb.revision,
-    scalafixDependencies ++= Seq("com.github.liancheng" %% "organize-imports" % "0.3.0"),
+    semanticdbVersion := "4.3.16",                                                // scalafixSemanticdb.revision,
+    scalafixDependencies ++= Seq("com.github.liancheng" %% "organize-imports" % "0.3.1-RC3"),
     Test / parallelExecution := false,
     Test / testOptions += Tests.Argument(TestFrameworks.ScalaCheck, "-s", "100"), // -s = -minSuccessfulTests
     testFrameworks += new TestFramework("munit.Framework"),
     initialCommands :=
       s"""|
-          |import scala.util.chaining._
-          |import fs2._, cats.effect._, cats.effect.implicits._, cats.implicits._
-          |import scala.concurrent.ExecutionContext.Implicits.global
-          |import scala.concurrent.duration._
-          |implicit val contextShiftIO: ContextShift[IO] = IO.contextShift(global)
-          |implicit val timerIO: Timer[IO] = IO.timer(global)
-          |println
-          |""".stripMargin
+         |import scala.util.chaining._
+         |import fs2._, cats.effect._, cats.effect.implicits._, cats.implicits._
+         |import scala.concurrent.ExecutionContext.Implicits.global
+         |import scala.concurrent.duration._
+         |implicit val contextShiftIO: ContextShift[IO] = IO.contextShift(global)
+         |implicit val timerIO: Timer[IO] = IO.timer(global)
+         |println
+         |""".stripMargin
   )
 
 lazy val root = (project in file("."))
