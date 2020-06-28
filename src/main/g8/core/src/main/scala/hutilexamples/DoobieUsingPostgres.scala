@@ -20,6 +20,7 @@ object DoobieUsingPostgres extends hutil.App {
 
   case class Country(code: String, name: String, population: Long)
 
+  @annotation.nowarn("cat=lint-byname-implicit")
   def find(name: String): ConnectionIO[Option[Country]] =
     sql"select code, name, population from country where name = \$name"
       .query[Country]
@@ -27,5 +28,5 @@ object DoobieUsingPostgres extends hutil.App {
 
   find("France")
     .transact(xa)
-    .unsafeRunSync pipe println
+    .unsafeRunSync() pipe println
 }

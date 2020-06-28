@@ -6,7 +6,7 @@ import scala.util.chaining._
 import cats.effect.IO
 
 import doobie._
-import doobie.h2._
+// import doobie.h2._
 import doobie.implicits._
 
 object DoobieUsingH2 extends hutil.App {
@@ -46,6 +46,7 @@ object DoobieUsingH2 extends hutil.App {
       .update
       .run
 
+  @annotation.nowarn("cat=lint-byname-implicit")
   def find(name: String): ConnectionIO[Option[Country]] =
     sql"select code, name, population from country where name = \$name"
       .query[Country]
@@ -69,5 +70,5 @@ object DoobieUsingH2 extends hutil.App {
 
   program
     .transact(xa)
-    .unsafeRunSync pipe println
+    .unsafeRunSync() pipe println
 }
