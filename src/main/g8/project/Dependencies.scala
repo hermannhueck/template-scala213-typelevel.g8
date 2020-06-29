@@ -3,6 +3,7 @@ import sbt._
 object Dependencies {
 
   lazy val collectionCompatVersion = "2.1.6"
+  lazy val scalaAsyncVersion       = "0.10.0"
   lazy val shapelessVersion        = "2.3.3"
   lazy val catsEffectVersion       = "2.1.3"
   lazy val fs2Version              = "2.4.2"
@@ -23,6 +24,7 @@ object Dependencies {
   lazy val scalaCheckVersion       = "1.14.3"
 
   lazy val collectionCompat   = "org.scala-lang.modules"     %% "scala-collection-compat" % collectionCompatVersion
+  lazy val scalaAsync         = "org.scala-lang.modules"     %% "scala-async"             % scalaAsyncVersion
   lazy val shapeless          = "com.chuusai"                %% "shapeless"               % shapelessVersion
   lazy val catsEffect         = "org.typelevel"              %% "cats-effect"             % catsEffectVersion
   lazy val fs2Core            = "co.fs2"                     %% "fs2-core"                % fs2Version
@@ -89,6 +91,7 @@ object Dependencies {
     Seq(
       scalaCompiler(scalaVersion),
       scalaReflect(scalaVersion),
+      scalaAsync,
       shapeless,
       monixEval,
       fs2Core,

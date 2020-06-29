@@ -14,6 +14,7 @@ object ScalacOptions {
     "-opt-inline-from:<source>",                 // ... from source files
     "-Xsource:2.13",                             // Treat compiler input as Scala source for scala-2.13
     "-Xcheckinit",                               // wrap field accessors to throw an exception on uninitialized access
+    "-Xasync:true",                              // Enable the async phase for scala.async.Async.{async,await}. [false]
     "-Xlint:adapted-args",                       // An argument list was modified to match the receiver.
     "-Xlint:byname-implicit",                    // Block adapted by implicit with by-name parameter.
     "-Xlint:constant",                           // Evaluation of a constant arithmetic expression resulted in an error.
