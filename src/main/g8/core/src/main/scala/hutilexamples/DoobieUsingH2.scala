@@ -6,7 +6,6 @@ import scala.util.chaining._
 import cats.effect.IO
 
 import doobie._
-// import doobie.h2._
 import doobie.implicits._
 
 object DoobieUsingH2 extends hutil.App {
