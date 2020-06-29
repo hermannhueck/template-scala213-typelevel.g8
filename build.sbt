@@ -12,6 +12,7 @@ lazy val root = (project in file("."))
   .settings(
     name := projectName,
     description := projectDescription,
+    scalaVersion := "2.12.11",
     scriptedLaunchOpts ++= List(
       "-Xms1g",
       "-Xmx1g",
