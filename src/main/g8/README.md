@@ -1,4 +1,3 @@
-# $project_name$
-  
-$project_description$
+# $project_description$
+### (short name: $project_name$)
 
