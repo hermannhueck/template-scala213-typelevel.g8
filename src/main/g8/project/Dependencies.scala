@@ -12,7 +12,7 @@ object Dependencies {
   lazy val http4sVersion           = "0.21.6"
   lazy val doobieVersion           = "0.9.0"
   lazy val quillVersion            = "3.5.2"
-  lazy val zioVersion              = "1.0.0-RC21-1"
+  lazy val zioVersion              = "1.0.0-RC21-2"
   lazy val pprintVersion           = "0.5.9"
   lazy val refinedVersion          = "0.9.14"
   lazy val singletonOpsVersion     = "0.5.1"
