@@ -19,4 +19,6 @@ project/metals.sbt
 
 # hidden files
 .history
+.envrc
+.env
 .DS_Store
