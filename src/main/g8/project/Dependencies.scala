@@ -14,13 +14,13 @@ object Dependencies {
   lazy val quillVersion            = "3.5.2"
   lazy val zioVersion              = "1.0.0-RC21-2"
   lazy val pprintVersion           = "0.5.9"
-  lazy val refinedVersion          = "0.9.14"
+  lazy val refinedVersion          = "0.9.15"
   lazy val singletonOpsVersion     = "0.5.1"
-  lazy val chimneyVersion          = "0.5.2"
+  lazy val chimneyVersion          = "0.5.3"
   lazy val monocleVersion          = "2.0.5"
   lazy val quicklensVersion        = "1.6.0"
   lazy val newtypeVersion          = "0.4.4"
-  lazy val munitVersion            = "0.7.9"
+  lazy val munitVersion            = "0.7.10"
   lazy val scalaCheckVersion       = "1.14.3"
 
   lazy val collectionCompat   = "org.scala-lang.modules"     %% "scala-collection-compat" % collectionCompatVersion
